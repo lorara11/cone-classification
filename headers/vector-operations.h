@@ -4,10 +4,11 @@
  * Description: Basic functions for vector operations in the vector space R^3
  */
 
-
 #ifndef HEADER_VECTOR_OPERATIONS
 #define HEADER_VECTOR_OPERATIONS
 
+#include <math.h>
+#include <stdlib.h>
 
 #define EPSILON 0.0000001	// Tolerance of 10^(-8) used when checking equalities.
 #define LEN 3      			// Length of vectors.
@@ -62,7 +63,7 @@ double angle(double * p, double * u, double * v)
 	/* Returns the signed angle (-pi < angle <= pi) between input vectors u, v;
 	 * p is a vector orthogonal to u and v, used to determine the sign of the angle. */
 
-    double cos = dotprod(u,v) / (norm(u) * norm(v));
+    double cos = dotproduct(u,v) / (norm(u) * norm(v));
 
     /* I make sure that cos is in the interval [-1,1], preventing errors
     * due to rounding when cos is close to the endpoints of the interval. */
@@ -88,9 +89,9 @@ double angle(double * p, double * u, double * v)
 }
 
 
-void vectprduct(double * prod, double * u, double * v)
+void crossproduct(double * prod, double * u, double * v)
 {
-	/* Computes the vectorial product of two input vectors u, v;
+	/* Computes the cross product of two input vectors u, v;
 	 * stores the result in the input array prod. */
 
     prod[0] = u[1]*v[2] - u[2]*v[1];
@@ -105,7 +106,7 @@ void projection(double * vector_proj, double * u, double * v)
 	 * Stores the result in the input array vector_proj. */
 
     int i;
-    double scalar = dotprod(u,v) / dotprod(u,u);
+    double scalar = dotproduct(u,v) / dotproduct(u,u);
 
     for (i=0; i<LEN; i++) {
         vector_proj[i] = v[i] - scalar * u[i];
