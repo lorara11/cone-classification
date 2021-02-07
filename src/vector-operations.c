@@ -1,22 +1,14 @@
 /*
- * vector-operations.h
+ * vector-operations.c
  * Author: Loredana Sandu
  * Description: Basic functions for vector operations in the vector space R^3
  */
 
-#ifndef HEADER_VECTOR_OPERATIONS
-#define HEADER_VECTOR_OPERATIONS
-
-#include <math.h>
-#include <stdlib.h>
-
-#define EPSILON 0.0000001	// Tolerance of 10^(-8) used when checking equalities.
-#define LEN 3      			// Length of vectors.
-
+#include "vector-operations.h"
 
 double dotproduct(double * u, double * v)
 {
-	/* Returns the dot product of two input vectors */
+    /* Returns the dot product of two input vectors */
 
     double result = 0;
     int i;
@@ -31,7 +23,7 @@ double dotproduct(double * u, double * v)
 
 double norm(double * u)
 {
-	/* Returns the norm of the input vector */
+    /* Returns the norm of the input vector */
 
     return sqrt(dotproduct(u,u));
 }
@@ -39,16 +31,16 @@ double norm(double * u)
 
 double det(double * u, double * v, double * w)
 {
-	/* Returns the determinant of the matrix formed by column vectors u,v,w in this order. */
+    /* Returns the determinant of the matrix formed by column vectors u,v,w in this order. */
 
     return u[0]*v[1]*w[2] + u[1]*v[2]*w[0] + u[2]*v[0]*w[1]
-		   - w[0]*v[1]*u[2] - w[1]*v[2]*u[0] - w[2]*v[0]*u[1];
+           - w[0]*v[1]*u[2] - w[1]*v[2]*u[0] - w[2]*v[0]*u[1];
 }
 
 
 unsigned int orthogonal(double * u, double * v)
 {
-	/* Returns 1 if input vectos u, v are orthogonal, and 0 if they aren't. */
+    /* Returns 1 if input vectos u, v are orthogonal, and 0 if they aren't. */
 
     if (fabs(dotproduct(u,v)) < EPSILON) {
         return 1;
@@ -60,8 +52,8 @@ unsigned int orthogonal(double * u, double * v)
 
 double angle(double * p, double * u, double * v)
 {
-	/* Returns the signed angle (-pi < angle <= pi) between input vectors u, v;
-	 * p is a vector orthogonal to u and v, used to determine the sign of the angle. */
+    /* Returns the signed angle (-pi < angle <= pi) between input vectors u, v;
+     * p is a vector orthogonal to u and v, used to determine the sign of the angle. */
 
     double cos = dotproduct(u,v) / (norm(u) * norm(v));
 
@@ -91,8 +83,8 @@ double angle(double * p, double * u, double * v)
 
 void crossproduct(double * prod, double * u, double * v)
 {
-	/* Computes the cross product of two input vectors u, v;
-	 * stores the result in the input array prod. */
+    /* Computes the cross product of two input vectors u, v;
+     * stores the result in the input array prod. */
 
     prod[0] = u[1]*v[2] - u[2]*v[1];
     prod[1] = u[2]*v[0] - u[0]*v[2];
@@ -102,8 +94,8 @@ void crossproduct(double * prod, double * u, double * v)
 
 void projection(double * vector_proj, double * u, double * v)
 {
-	/* Computes the orthogonal projection of vector v onto vector u.
-	 * Stores the result in the input array vector_proj. */
+    /* Computes the orthogonal projection of vector v onto vector u.
+     * Stores the result in the input array vector_proj. */
 
     int i;
     double scalar = dotproduct(u,v) / dotproduct(u,u);
@@ -112,6 +104,3 @@ void projection(double * vector_proj, double * u, double * v)
         vector_proj[i] = v[i] - scalar * u[i];
     }
 }
-
-
-#endif // HEADERS_VECTOR_OPERATIONS

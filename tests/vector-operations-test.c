@@ -1,5 +1,5 @@
 /*
- * math-pi-value.c
+ * vector-operations-test.c
  * Author: Loredana Sandu
  * Description: Tests the functions found in vector-operations.h
  */
