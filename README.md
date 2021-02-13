@@ -30,6 +30,20 @@ Let <img src="https://latex.codecogs.com/gif.latex?C" title="C" /> be a convex c
  - **Half-space**
  - **Space**, i.e. <img src="https://latex.codecogs.com/gif.latex?C&space;=&space;\mathbb{R}^3" title="C = \mathbb{R}^3" />
 
- 
-***
-Project in progress
+## Usage
+
+To compile the program, run the following command inside the `src` directory:
+
+```
+make
+```
+
+Once the compilation is done, to execute the program, run the following command inside the `src` directory:
+
+```
+./classify_cone
+```
+
+The program will ask for the name of the input file, which has to be located inside the `in_files` directory. The input file contains the generating vectors of the cone which will be classified. Each vector is written in a new line, and the components of the vector are separated with a comma and a tab.
+
+The program will generate an output file with the set of minimal generating vectors of the cone. The format will be the same as the input file. The output file will be located inside the `out_files` directory and given the name and extension specified by the user.
